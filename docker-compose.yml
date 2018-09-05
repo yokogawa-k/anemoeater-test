@@ -1,0 +1,14 @@
+version: '2.3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    command: --log-bin=mysql-bin --slow-query-log=true --binlog-format=mixed --long-query-time=0 --slow-query-log-file=slow.log --server-id=101
+  sysbench:
+    build: ./docker/sysbench/
+    image: sysbench
+    tty: true
+    stdin_open: true
+
